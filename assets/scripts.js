@@ -1,4 +1,22 @@
-let currentPrice=0, itemCount=0
+const cart = {
+    currentPrice: 0,
+    items: [],
+    addItem: function(cookie, price) {
+        // add a cookie (string) to the items array
+        this.items.push(cookie)
+        
+        //add the price (number) to the currentPrice properties
+        this.currentPrice = price + this.currentPrice
+    },
+    clear: function() {
+        //reset the currentPrice and items properties
+        this.currentPrice = 0,
+        this.items = []
+    },
+}
+
+
+//let currentPrice=0, itemCount=0
 
 function addToCart(cookie) {
     /* 
@@ -12,31 +30,34 @@ function addToCart(cookie) {
    console.log('The user is adding this type of cookie to their cart: ' , cookie) 
 
    //add 1 to the itemCount variable
-   itemCount = itemCount+1
-    console.log(itemCount)
+  
+    //itemCount = itemCount+1
+    //console.log(itemCount)
     
-    document.getElementById("cartItems").innerHTML= itemCount
+    document.getElementById("cartItems").innerHTML= cart.items.length +1
 
         
 
    //add the correct price to the currentPrice variable
    if (cookie == 'peanut butter') {
-    currentPrice = currentPrice + 20
+    cart.addItem(cookie, 20)
+    //currentPrice = currentPrice + 20
     }
     else if (cookie == 'sandies') {
-    currentPrice = currentPrice + 30
+    cart.addItem(cookie, 30)        
+    //currentPrice = currentPrice + 30
     }
     else if (cookie == 'party press') {
-    currentPrice = currentPrice + 35
+    cart.addItem(cookie, 35)
+    // /currentPrice = currentPrice + 35
     }
     else if (cookie == 'chocolate chip') {
-    currentPrice = currentPrice + 25
+    cart.addItem(cookie, 25)
+    // currentPrice = currentPrice + 25
     }
 
-document.querySelector(".hoverText").innerHTML = currentPrice
+    document.querySelector(".hoverText").innerHTML = "$"+ cart.currentPrice
 
-
-console.log(currentPrice)
 }
 
 function checkout() {
@@ -47,12 +68,12 @@ function checkout() {
 
     window.prompt(`Please provide your name and address \nThank you for shopping with us!`)
 
-    currentPrice = 0
-    itemCount = 0
+    console.log(cart)
 
-    document.getElementById("cartItems").innerHTML= itemCount
-    document.querySelector(".hoverText").innerHTML = currentPrice
+    cart.clear()
 
+    document.getElementById("cartItems").innerHTML= cart.items.length
+    document.querySelector(".hoverText").innerHTML = "$" + cart.currentPrice
 }
 
 function darkMode() {
