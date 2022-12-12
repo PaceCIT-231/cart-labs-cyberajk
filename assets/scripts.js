@@ -10,8 +10,15 @@ const cart = {
     },
     clear: function() {
         //reset the currentPrice and items properties
-        this.currentPrice = 0,
+        this.currentPrice = 0
         this.items = []
+    },
+    getSummary: function() {
+        let summary = `<p>Number of Items: ${this.items.length}</p>
+            <h4>Details</h4>
+            <p>${this.items.join('<br>')}</p>
+            <p>Total Price: $${this.currentPrice}</p>`
+        return summary
     },
 }
 
@@ -66,8 +73,9 @@ function checkout() {
     
     //window.alert(`You have ${itemCount} items that will cost $${currentPrice}.  Thank you for shopping with us!`)
 
-    window.prompt(`Please provide your name and address \nThank you for shopping with us!`)
-
+    //window.prompt(`Please provide your name and address \nThank you for shopping with us!`)
+    document.getElementById("summary-body").innerHTML=cart.getSummary()
+    document.getElementById("summary").style.display = "block"
     console.log(cart)
 
     cart.clear()
@@ -85,3 +93,9 @@ function darkMode() {
 
 }
 
+function clearCart() {
+    cart.clear()
+
+    document.getElementById("cartItems").innerHTML= cart.items.length
+    document.querySelector(".hoverText").innerHTML = "$" + cart.currentPrice
+}
